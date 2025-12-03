@@ -19,11 +19,11 @@
 // --- AJUSTE DO RADAR ---
 #define SERVO_CENTER      90
 
-// 1. Abertura: 35 graus para cada lado (Total 70 graus)
+// Abertura: 35 graus para cada lado (Total 70 graus)
 #define SCAN_ANGLE_MIN    65
 #define SCAN_ANGLE_MAX    115
 
-// 2. Fluidez
+// Fluidez
 #define SCAN_STEP         10   
 #define SCAN_INTERVAL     40   
 
@@ -147,11 +147,11 @@ void decideRoute() {
     stopMotors();
     delay(300);
 
-    // 1. Olha para a DIREITA primeiro (Angulo 10)
+    // Olha para a DIREITA primeiro (Angulo 10)
     headServo.write(10); delay(600);
     int distDir = getStableDistance();
     
-    // 2. Olha para a ESQUERDA depois (Angulo 170)
+    // Olha para a ESQUERDA depois (Angulo 170)
     headServo.write(170); delay(600);
     int distEsq = getStableDistance();
 
@@ -161,18 +161,11 @@ void decideRoute() {
     Serial.print("Dir: "); Serial.print(distDir);
     Serial.print(" | Esq: "); Serial.println(distEsq);
 
-    // Lógica de decisão (Matematicamente igual, apenas a ordem de leitura mudou)
     if (distEsq >= distDir && distEsq > DIST_STOP) {
         smartTurnLeft();
     }
     else if (distDir > distEsq && distDir > DIST_STOP) {
         smartTurnRight();
-    }
-    else {
-        // Beco sem saída: vira tudo para esquerda (padrão)
-        smartTurnLeft();
-        delay(400);
-        smartTurnLeft();
     }
     
     stopMotors();

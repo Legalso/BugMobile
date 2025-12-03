@@ -1,30 +1,30 @@
 /* ==========================================================================
-   ARQUIVO UNIFICADO: style_bugmobile.css
-   Descrição: Estilo mestre BugMobile (Cyber Squad Migrated)
-   Abrangendo: Home, Robocar, Projeto, Equipe, Membros, Links e Contato
-   Data: 2025-11-18
+   ARQUIVO UNIFICADO: style_bugmobile.css (FINAL OTIMIZADO)
    ========================================================================== */
 
 /* ==========================================================================
-   0. IMPORTAÇÕES E VARIÁVEIS (Do antigo variaveis.css)
+   0. IMPORTAÇÕES E VARIÁVEIS
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=SUSE:wght@100..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=SUSE:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Carter+One&display=swap');
 
 :root {
-    --nav-font: "Montserrat", sans-serif;
-    --titulos: "Orbitron", sans-serif;
-    --p-font: "Montserrat", sans-serif;
-    --p-membros: "Orbitron", sans-serif;
-    --p-cargos: "Montserrat", sans-serif;
+    /* Paleta de Cores Natural */
+    --primary-color: #c62828;      /* Vermelho Joaninha */
+    --secondary-color: #2e7d32;    /* Verde Folha */
+    --bg-body-warm: #fcfbf9;       /* Branco Quente (Casca de ovo) */
+    --bg-white: #ffffff;           /* Branco Puro */
+    --text-color: #333333;         
+    --text-light: #555555;         
+    
+    /* Fontes */
+    --main-font: "Montserrat", sans-serif;
+    --bug-font: "Carter One", display; 
 }
 
 /* ==========================================================================
-   1. RESET E CONFIGURAÇÕES GERAIS (BODY & HTML)
+   1. RESET E GERAL
    ========================================================================== */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
   margin: 0;
@@ -33,613 +33,450 @@ html, body {
 }
 
 body {
-  color: white;
-  background-color: #0d031b; /* Fundo base escuro */
+  color: var(--text-color);
+  background-color: var(--bg-body-warm);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: var(--p-font, sans-serif);
+  font-family: var(--main-font);
+  line-height: 1.6;
 }
 
-main {
-  flex: 1;
+main { flex: 1; }
+a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+
+/* Garante que imagens e vídeos sejam responsivos por padrão */
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
 }
 
-/* Classes de Background de Página */
-.home-page::before,
-.home-page-2::before,
-.home-page-3::before {
+/* Backgrounds com Overlay */
+.home-page, .home-page-2 {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  min-height: 100vh;
+}
+
+.home-page::before, .home-page-2::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Overlay escuro padrão */
+  background-color: rgba(252, 251, 249, 0.95);
   z-index: -1;
 }
 
-.home-page {
-  background-image: url(../../img/Homepage3.png);
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  z-index: 0;
-  height: 100vh;
-}
+.home-page { background-image: url(../../img/Homepage3.png); }
+.home-page-2 { background-image: url(../../img/Sobre_Projeto_Fundo.png); }
 
-.home-page-2 {
-  background-image: url(../../img/Sobre_Projeto_Fundo.png);
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  z-index: 0;
-  height: 100vh;
-}
-
-.home-page-3 {
-  background-image: url(../../img/About_Fundo.png);
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  z-index: -1;
-  height: 100vh;
-}
-
-/* Espaçamentos Utilitários */
-.small-gap { padding-top: 15%; }
-.small-gap2 { padding-top: 5%; padding: 20px; }
+.small-gap2 { padding-top: 50px; padding-bottom: 50px; }
 
 /* ==========================================================================
-   2. HEADER E NAVEGAÇÃO
+   2. HEADER
    ========================================================================== */
 header {
-  background-color: #0e1016;
-  color: white;
-  padding: 10px 0px 5px 0px;
-  position: relative;
-  z-index: 2;
-  margin-bottom: 200px;
+  background-color: var(--bg-white);
+  box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
 }
 
-/* Navegação Principal */
 .menu-nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: #151820;
-  padding: 5px;
-  position: fixed;
-  top: 0;
+  padding: 10px 5%;
   width: 100%;
-  z-index: 10000;
-  transition: transform 0.3s ease-in-out;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
-.menu-nav.hidden { transform: translateY(-100%); }
-.menu-nav.visible { transform: translateY(0); }
+#img-acima {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.cabecalho-logo img { height: 65px; width: auto; display: block; }
 
 .menu-nav ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  font-family: var(--nav-font);
-  z-index: 10000;
+  gap: 25px;
 }
 
-.menu-nav li {
-  display: inline-block;
-  padding: 0 40px;
-  margin: 0 20px;
-  position: relative;
-  z-index: 10000;
+nav a.links {
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 8px;
 }
 
-.menu-nav li:hover { transform: scale(1.1); }
-
-nav a {
-  text-decoration: none;
-  color: rgb(178, 178, 197);
-  padding: 15px 4px;
-  border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
-  z-index: 10000;
+nav a.links:hover {
+  color: var(--primary-color);
+  background-color: #fff0f0;
 }
 
 .menu-toggle {
   display: none;
-  font-size: 24px;
+  font-size: 28px;
   background: none;
   border: none;
-  color: #ffffff;
+  color: var(--text-color);
   cursor: pointer;
-  z-index: 10000;
 }
 
-/* Logo do Cabeçalho */
-#cabecalho-logo {
-  max-width: 100%;
-  height: auto;
-  z-index: 10000;
+/* ==========================================================================
+   3. TIPOGRAFIA & COMPONENTES
+   ========================================================================== */
+h1, h2, h3, h4 {
+  font-family: var(--main-font);
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-weight: 700;
 }
 
-.cabecalho-logo {
-  width: 96px;
-  height: 110px;
-  display: block;
-  margin: 1px auto 0;
-  transition: transform 0.2s;
-  z-index: 10000;
+.titulo-inseto {
+    font-family: var(--bug-font);
+    font-size: 5rem;
+    color: var(--primary-color);
+    margin: 40px 0 10px 0;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
-.cabecalho-logo:hover { transform: scale(1); }
 
-#img-acima {
+.main-text, .titulo-projeto, .nossos-membros, .sobre-nos, .conheca-nos, .main-text-centralizado {
+  color: var(--primary-color);
+  text-align: center;
+  font-size: 2.2rem;
+  margin-top: 50px;
+}
+
+p { color: var(--text-light); font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px; }
+
+/* Botões */
+.lets-start, .botao-outros, .botao-detalhes, .saiba-mais-btn, .botao-contato {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
+  transition: all 0.3s ease;
+  font-family: var(--main-font);
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+}
+
+.lets-start:hover, .botao-detalhes:hover {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+}
+
+.botao-outros {
+  background-color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(198, 40, 40, 0.2);
+}
+.botao-outros:hover { background-color: #b71c1c; }
+
+/* ==========================================================================
+   4. SEÇÕES DA HOME
+   ========================================================================== */
+.msg-principal { margin-top: 80px; text-align: center; padding: 0 20px; }
+.texto-principal { max-width: 800px; margin: 0 auto 40px auto; font-size: 1.2rem; }
+.titulo-principal { max-width: 80%; margin: 0 auto; display: block;}
+
+/* Sobre Nós */
+.sobre-nos-conteudo {
+  background-color: var(--bg-white);
+  padding: 60px 20px;
+  margin: 40px 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+}
+
+.equipe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 40px auto;
+  flex-wrap: wrap;
+}
+.equipe img { width: 500px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+/* Membros */
+.membros { background-color: var(--bg-white); padding: 60px 20px; }
+.pessoas { display: flex; flex-direction: column; align-items: center; width: 200px; text-align: center; }
+.pessoas img {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg-body-warm);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  margin-bottom: 15px;
+}
+.pessoas img:hover { transform: scale(1.05); border-color: var(--primary-color); }
+
+/* Projeto Home */
+.nosso-projeto {
+  background-color: var(--bg-body-warm);
+  padding: 80px 10%;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+.nosso-projeto-imagem, .nosso-projeto-texto { flex: 1; min-width: 300px; }
+.carrinho-img { filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); }
+
+/* Explore Nossa Jornada (Centralizado) */
+.outros {
+  background-color: var(--bg-white);
+  padding: 60px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  z-index: 10000;
+  justify-content: center;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+.outros-conteudo { max-width: 700px; margin-bottom: 20px; }
+.outros-botoes { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+
+/* ==========================================================================
+   5. PÁGINAS INTERNAS (PROJETO/ROBOCAR)
+   ========================================================================== */
+.card-projeto-primeiro-evento, .card-projeto-segundo-evento, .sobre-robocar, .tematica, .card-projeto, .card-projeto-modalidades {
+  background-color: var(--bg-white);
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+  padding: 40px;
+  margin: 30px auto;
+  max-width: 1200px;
 }
 
-@media (max-width: 768px) {
+/* Imagens técnicas */
+#carbon-code, #circuitoFinalizado, #carroFinalizado {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: block;
+    margin: 20px auto;
+}
+#carbon-code { width: 70%; }
+
+/* Cards Container */
+.cards-container { display: flex; justify-content: center; gap: 20px; padding: 20px; flex-wrap: wrap;}
+
+.card {
+    background: var(--bg-white);
+    width: 280px;
+    border-radius: 15px;
+    padding-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    border: 1px solid #eee;
+}
+.card-image { width: 100%; height: 180px; object-fit: cover; border-radius: 15px 15px 0 0; }
+.card-title { font-size: 1.1rem; color: var(--text-color); margin: 15px 0; }
+
+/* Videos */
+.video-container { text-align: center; margin: 20px 0; width: 100%; }
+video { border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+/* ==========================================================================
+   6. PÁGINA CONTATO (GRID PERFEITO)
+   ========================================================================== */
+.contato-grid {
+    display: grid;
+    /* Cards responsivos: mínimo 250px, esticam igualmente */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 50px 10%;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+.contato-item {
+    background-color: var(--bg-white);
+    border: 1px solid #eee;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-radius: 15px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: flex-start;
+    gap: 20px;
+    transition: transform 0.3s ease;
+    height: 100%; 
+    text-align: center;
+}
+
+.contato-item:hover { transform: translateY(-5px); }
+
+.contato-item img {
+    width: 120px;      
+    height: 120px;     
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--bg-body-warm);
+    flex-shrink: 0;   
+}
+
+.contato-item .info {
+    width: 100%;
+    word-wrap: break-word; 
+    word-break: break-word;
+}
+
+.contato-item h2 { margin-bottom: 5px; font-size: 1.2rem; }
+.cargo-contato { color: var(--secondary-color); font-weight: 600; margin-bottom: 10px; font-size: 0.95rem; }
+.info p { margin-bottom: 10px; line-height: 1.4; }
+.info a { color: var(--primary-color); font-weight: 700; text-decoration: underline; font-size: 0.9rem;}
+
+
+/* ==========================================================================
+   7. FOOTER
+   ========================================================================== */
+footer {
+  margin-top: 50px;
+  background-color: var(--bg-white);
+  border-top: 1px solid #eee;
+  color: var(--text-color);
+}
+
+.footer-content {
+  padding: 40px 10%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-logo img { height: 65px; width: auto; margin-bottom: 10px; }
+.footer-logo-text h3 { font-family: var(--bug-font); color: var(--primary-color); margin: 0; font-size: 1.5rem; }
+.footer-descricao { color: var(--text-light); font-size: 0.9rem; margin-top: 5px; }
+
+.footer-links h4, .footer-gallery h4, .footer-contact h4 {
+  color: var(--primary-color);
+  font-size: 1rem;
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--secondary-color);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* REGRA GLOBAL PARA REMOVER BOLINHAS NO FOOTER */
+.footer-links ul, .footer-gallery ul, .footer-contact ul, 
+.footer-links li, .footer-gallery li, .footer-contact li { 
+    list-style: none !important; 
+    list-style-type: none !important;
+    padding: 0;
+    margin-left: 0;
+}
+
+.footer-links li, .footer-gallery li, .footer-contact li { margin-bottom: 8px; }
+.footer-links a, .footer-gallery a, .footer-contact a { color: var(--text-light); font-size: 0.95rem; }
+.footer-links a:hover, .footer-contact a:hover { color: var(--primary-color); }
+
+.footer-contact button { background-color: var(--primary-color); width: 100%; }
+.footer-contact button:hover { background-color: #b71c1c; }
+
+.footer-bottom {
+  background-color: var(--bg-body-warm);
+  text-align: center;
+  padding: 15px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  border-top: 1px solid #eee;
+}
+
+/* ==========================================================================
+   8. RESPONSIVIDADE GLOBAL (MOBILE E TABLET)
+   ========================================================================== */
+@media (max-width: 900px) {
+  /* Header e Menu Hambúrguer */
+  #img-acima {
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 25px;
+  }
+
+  /* O menu fica escondido e aparece verticalmente quando ativo */
   .menu-nav ul {
-    display: none;
+    display: none; 
     flex-direction: column;
     width: 100%;
     text-align: center;
-    z-index: 10000;
+    padding-top: 20px;
+    background-color: var(--bg-white);
+    border-top: 1px solid #eee;
+    position: absolute;
+    top: 100%; /* Empurra para baixo do header */
+    left: 0;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.05);
   }
-  .menu-nav ul.active { display: flex; }
-  .menu-toggle { display: block; }
-  header { margin-bottom: 150px; }
-}
 
-/* ==========================================================================
-   3. TIPOGRAFIA UNIFICADA
-   ========================================================================== */
-/* Títulos Neon Padrão */
-.main-text, 
-.modalidades, 
-.classificacao, 
-#imagensProjeto, 
-#funcionamentoGeral,
-.card-text,
-.avalie-nos,
-.grupo10,
-.nossos-membros,
-#sobreNos,
-#conhecaNos,
-.outros h2,
-.sobre-nos, 
-.conheca-nos,
-.titulo-projeto {
-  font-family: var(--titulos);
-  color: #fff;
-  text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 10px #00aeff, 0 0 30px #00aeff;
-}
-
-.titulo-projeto {
-  font-size: 2.5em;
-  text-shadow: 0 0 5px rgba(0, 174, 255, 0.8), 0 0 10px rgba(0, 174, 255, 0.8), 0 0 20px rgba(0, 174, 255, 0.5);
-}
-
-.main-text {
-  font-size: 2em;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Variação de Texto Rosa */
-strong {
-  font-family: var(--titulos);
-  font-size: 1em;
-  color: #fff;
-  margin-bottom: 1em;
-  text-shadow: 0 0 5px #ff0084, 0 0 10px #ff0084, 0 0 10px #ff0084, 0 0 30px #ff0084;
-}
-
-/* Textos de Parágrafo */
-.main-text-p, #sobreP, .outros p, .texto-principal, .opiniao, .sobre-nos-p, .descricao-projeto {
-  font-family: var(--p-font);
-  color: #ccc;
-}
-
-.avalie-nos { font-size: 2em; text-align: center; width: 100%; padding: 0 80px; }
-.grupo10 { font-size: 1.5em; text-align: center; width: 100%; padding: 0 80px; }
-.opiniao { font-size: 1em; color: #fff; text-align: center; width: 100%; padding: 0 80px; }
-
-/* ==========================================================================
-   4. HOME & HERO SECTIONS
-   ========================================================================== */
-.msg-principal {
-  margin-top: 250px;
-}
-
-.titulo-principal {
-  display: block;
-  margin: 100px auto 20px auto;
-  max-width: 100%;
-  height: auto;
-}
-
-.texto-principal {
-  text-align: center;
-  margin-bottom: 20px;
-  color: white;
-  padding: 15px 250px;
-}
-
-/* Botões Gerais e da Home */
-.botao-principal { text-align: center; }
-
-/* Estilo base para botões neon */
-.lets-start, .botao-outros, .botao-detalhes, .saiba-mais-btn {
-  background: #1a1a1a; /* Base escura */
-  border: 2px solid #00ffff;
-  border-radius: 6px;
-  color: #00ffff;
-  font-size: 1em;
-  padding: 10px 20px;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
-  font-family: var(--titulos);
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-}
-
-.lets-start:hover, .botao-outros:hover, .botao-detalhes:hover, .saiba-mais-btn:hover {
-  background: #00ffff;
-  color: #1a1a1a;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.8);
-  border-color: #1a1a1a;
-  transform: scale(1.05); /* Zoom leve */
-}
-
-.lets-start { width: 250px; margin: 20px; }
-.botao-outros { padding: 10px 150px; max-width: 500px; }
-.saiba-mais-btn { background-color: #0d1d24; position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 150px; font-size: 0.8em; }
-.saiba-mais-btn:hover { background-color: #007bb5; transform: translateX(-50%) scale(1.05); }
-
-@media (max-width: 768px) {
-  .texto-principal { padding: 15px 15px; }
-  .titulo-principal { padding: 30px; }
-  .lets-start { width: 80%; max-width: 400px; padding: 15px; }
-  .botao-outros, .botao-detalhes { width: 100%; max-width: none; padding: 10px 0; }
-}
-
-@media (max-width: 480px) {
-  .texto-principal { padding: 10px 10px; }
-  .titulo-principal { max-width: 80%; }
-}
-
-/* ==========================================================================
-   5. SEÇÃO EQUIPE
-   ========================================================================== */
-.equipe, #equipe {
-  display: flex;
-  align-items: flex-start;
-  gap: 150px;
-  padding: 100px 80px;
-  margin-bottom: 0em;
-}
-
-/* Ajustes de override do projeto.css */
-.equipe { padding: 0px 100px 80px 80px; }
-
-.sobre-nos-conteudo { display: flex; flex-direction: column; }
-
-.sobre-nos { padding: 0px 80px 0px; font-size: 2.5em; margin-bottom: 0em; }
-.conheca-nos { padding: 0px 0px 0px 80px; font-size: 1.5em; margin-bottom: 1em; }
-
-#sobreP, .sobre-nos-p {
-  font-size: 1em;
-  line-height: 1.5;
-  color: #fff; /* ou #ccc */
-  text-align: justify;
-  font-family: var(--p-font);
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
-.equipe img, #fotoEquipe {
-  flex: 1;
-  max-width: 400px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-top: 5em;
-}
-
-/* Correção para fotoEquipe não ter margem top excessiva */
-#fotoEquipe { margin-top: 0; } 
-
-@media (max-width: 768px) {
-  .equipe, #equipe {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 0px 10px;
+  .menu-nav ul.active {
+    display: flex; /* Classe ativada via JS */
   }
-  .sobre-nos, .conheca-nos, .sobre-nos-conteudo { padding: 0 20px; }
-  .sobre-nos-p { max-width: 100%; margin-bottom: 20px; padding: 0 10px; }
-  .equipe img, #fotoEquipe { margin-top: 0; max-width: 100%; margin-bottom: 20px; }
-}
 
-/* ==========================================================================
-   6. SEÇÃO MEMBROS
-   ========================================================================== */
-.membros {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 45px;
-  justify-content: center;
-  padding: 0em;
-  text-align: center;
-}
+  .menu-nav li {
+    margin: 10px 0;
+  }
 
-.nossos-membros { font-size: 2em; text-align: left; width: 100%; padding: 0 80px; }
+  /* Ajuste de Tipografia para telas pequenas */
+  .titulo-inseto { font-size: 3rem; margin-top: 20px; }
+  .main-text, .titulo-projeto, .main-text-centralizado { font-size: 1.8rem; margin-top: 30px; }
+  .texto-principal { font-size: 1rem; padding: 0 10px; }
+  h2 { font-size: 1.5rem; }
 
-.pessoas { text-align: center; width: 150px; }
+  /* Ajuste de Espaçamento e Layout */
+  .msg-principal { margin-top: 40px; padding: 0 15px; }
+  
+  .nosso-projeto, .sobre-nos-conteudo, .membros, .outros, .contato-grid, 
+  .card-projeto-primeiro-evento, .card-projeto-segundo-evento, .card-projeto {
+      padding: 40px 5%; /* Menos padding lateral para aproveitar espaço */
+  }
 
-.pessoas img {
-  width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  /* Empilhamento de seções (Flex Column) */
+  .equipe { flex-direction: column; gap: 30px; }
+  .nosso-projeto { flex-direction: column; text-align: center; }
+  .nosso-projeto-imagem, .nosso-projeto-texto { width: 100%; }
+  
+  /* Centralizações Forçadas Mobile */
+  .titulo-projeto { text-align: center !important; }
+  .botoes-projeto { justify-content: center; display: flex; flex-wrap: wrap;}
+  .image-container { flex-direction: column; } /* Slider de imagens se tiver */
 
-.pessoas img:hover { box-shadow: 0 0 10px #00aeff, 0 0 20px #00aeff, 0 0 40px #00aeff; }
+  /* Ajustes de Imagens e Cards */
+  .equipe img { width: 100%; max-width: 100%; }
+  .card { width: 100%; max-width: 350px; } /* Cards ocupam largura cheia se precisar */
+  #carbon-code { width: 100%; }
 
-.nomes { font-size: 1.2em; font-family: var(--p-membros); color: #fff; margin-top: 10px; }
-.cargos { font-size: 0.9em; color: #ccc; font-family: var(--p-cargos); }
-
-@media (max-width: 600px) {
-  .membros { flex-direction: column; align-items: center; }
-  .pessoas { width: 100%; max-width: 200px; }
-}
-
-/* ==========================================================================
-   7. SEÇÃO LINKS / OUTROS
-   ========================================================================== */
-.outros {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  color: #fff;
-  padding: 40px;
-  background-color: #160925;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.outros-conteudo { flex: 1; padding: 20px 40px; }
-.outros h2 { font-size: 2em; text-align: left; }
-.outros p { font-size: 1em; line-height: 1.6; max-width: 600px; margin-bottom: 20px; text-align: justify; }
-
-.outros-botoes {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 40px;
-  margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-  .outros { flex-direction: column; align-items: center; text-align: center; }
-  .outros-conteudo, .outros-botoes { max-width: 100%; padding: 0; }
-  .outros-botoes { align-items: center; }
-}
-
-/* ==========================================================================
-   8. COMPONENTES: CARDS & MODALS
-   ========================================================================== */
-.cards-container { display: flex; align-items: center; justify-content: center; gap: 10px; z-index: 1; }
-.cards-wrapper { display: flex; overflow: hidden; width: 1000px; z-index: 1; }
-
-.card {
-  flex: 0 0 250px;
-  height: 350px;
-  margin: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  position: relative;
-  background-color: white;
-}
-
-.card.dark-theme, .card-robocar {
-  background-color: #302540;
-  box-shadow: 0 0 2px #ffffff;
-  color: white;
-  flex: 0 0 320px;
-  height: 420px;
-}
-
-.card-title {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.2em;
-  margin: 10px 0;
-  font-family: var(--titulos);
-  background-color: #0d1d24;
-  color: #eeff00;
-  border: 2px solid #eeff00;
-  padding: 5px 10px;
-  border-radius: 10px;
-  white-space: nowrap;
-}
-
-.card-image { width: 100%; max-height: 200px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px; }
-
-/* Navegação Slider */
-.nav-btn {
-  background-color: white;
-  border: none;
-  color: #00aeff;
-  font-size: 1.5em;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-  z-index: 1;
-  box-shadow: 0 0 1px #00aeff, 0 0 5px #00aeff, 0 0 5px #00aeff, 0 0 15px #00aeff;
-}
-.nav-btn:hover { background-color: #0f2a75; }
-
-@media (max-width: 768px) {
-  .cards-wrapper { flex-direction: column; align-items: center; width: 100%; }
-  .card, .card.dark-theme { flex: 0 0 auto; width: 90%; margin: 10px 0; }
-  .nav-btn { width: 40px; height: 40px; font-size: 1.2em; }
-}
-
-/* Modais */
-.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.5); }
-.modal-content { background-color: white; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 10px; }
-.close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
-.close-btn:hover { color: black; }
-.modal-text { color: black; font-family: var(--p-font); }
-
-/* ==========================================================================
-   9. TEMÁTICA, EVENTOS E PROJETOS
-   ========================================================================== */
-.card-projeto { display: flex; align-items: flex-start; gap: 50px; padding: 0px 30px 10px 20px; margin: 0 auto; max-width: 1250px; }
-.card-projeto img { flex: 1; object-fit: cover; width: 450px; height: 300px; }
-
-.com-borda, #circuitoFinalizado, #carroFinalizado {
-  border: 2px solid #fff;
-  box-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 10px #00aeff, 0 0 30px #00aeff;
-  border-radius: 10px;
-}
-
-#circuitoFinalizado, #carroFinalizado { margin-top: 40px; width: 100%; max-width: 600px; margin: 40px auto 0; display: block; }
-
-.tematica {
-  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
-  background-color: #2c2a3a; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 20px; margin: 20px auto; max-width: 1200px; width: 100%; gap: 30px;
-}
-
-.texto-container { flex: 1; min-width: 280px; max-width: 60%; margin-left: 20px; }
-.imagem-tematica { flex: 1; min-width: 300px; max-width: 50%; text-align: center; }
-.imagem-tematica img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-
-/* Estilos de Eventos */
-.card-projeto-primeiro-evento, .card-projeto-segundo-evento {
-  background-color: #302540; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 30px; margin: 80px auto 20px; max-width: 1600px;
-}
-
-.card-projeto-segundo-evento, .evento-content { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
-.desafios li { color: #ccc; padding: 10px; font-family: var(--p-font); }
-
-/* Entrevista e Robocar Info */
-.sobre-robocar { text-align: center; padding: 30px; background-color: #302540; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-.imagens-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 20px auto; }
-.imagem { width: 48%; max-width: 500px; height: auto; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-.Entrevista, .entrevistaPablo { text-align: center; color: white; font-family: var(--titulos); text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff; }
-.Entrevista { font-size: 2em; margin: 0 auto; }
-.entrevista-container { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #21192c; }
-#carbon-code, #vencedores { width: 50%; display: block; margin: 0 auto; border-radius: 10px; }
-.video-container { display: flex; justify-content: center; align-items: center; overflow: hidden; margin: 0 auto; width: 100%; max-width: 600px; border-radius: 10px; }
-.video-container video { width: 100%; height: 100%; object-fit: cover; }
-
-@media (max-width: 768px) {
-  .tematica, .card-projeto-segundo-evento, .evento-content { flex-direction: column; align-items: center; }
-  .texto-container, .imagem-tematica { max-width: 100%; margin-left: 0; }
-  #carbon-code, #vencedores { width: 100%; }
-  .card-projeto { flex-direction: column; align-items: center; padding: 0 10px; }
-  .card-projeto img { max-width: 100%; margin-bottom: 20px; }
-}
-
-@media (max-width: 1024px) { .imagens-container .imagem { width: 93%; } }
-
-/* ==========================================================================
-   10. PÁGINA DE CONTATO
-   ========================================================================== */
-.contato-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px; }
-
-.contato-item {
-  display: flex; align-items: center; background-color: #3b4042; padding: 20px;
-  border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); font-family: var(--p-font);
-  font-size: 13px; box-sizing: border-box;
-}
-
-.contato-item img { width: 130px; height: 130px; border-radius: 10px; margin-right: 20px; }
-.contato-item .info { display: flex; flex-direction: column; text-align: left; width: 100%; }
-.info h2 { font-size: 1.5em; margin: 0; }
-.info p { margin: 5px 0; }
-.info a { color: #00aeff; text-decoration: none; }
-.info a:hover { text-decoration: underline; }
-
-@media (max-width: 768px) {
-  .contato-grid { grid-template-columns: 1fr; }
-  .contato-item { flex-direction: column; text-align: center; }
-  .contato-item img { margin: 0 auto 10px; }
-  .info { align-items: center; text-align: center; }
-}
-
-/* ==========================================================================
-   11. FOOTER (Rodapé Completo)
-   ========================================================================== */
-footer { margin-top: 30px; text-align: center; color: white; }
-.footer-content { background-color: #0e1016; padding: 30px; display: flex; flex-direction: row; align-items: flex-start; border-top: 1px solid #2a303f; }
-.footer-logo { display: flex; align-items: center; gap: 10px; margin-left: 40px; margin-right: 100px; }
-.footer-links, .footer-contact, .footer-gallery { flex-grow: 1; text-align: left; margin-bottom: 20px; }
-.footer-logo h3 { margin: 0; color: #ffffff; font-size: 1.5rem; font-family: var(--titulos); }
-.footer-logo img { width: 90px; }
-.footer-descricao { color: #cccccc; margin-top: 10px; font-size: 0.9rem; font-family: var(--p-font); }
-.footer-links h4, .footer-contact h4, .footer-gallery h4 { margin: 0 0 10px; color: #ffffff; font-size: 1rem; font-family: var(--titulos); }
-.footer-links ul, .footer-contact button, .footer-gallery ul { list-style-type: none; padding: 0; margin: 0; }
-.footer-links li, .footer-gallery li { margin-bottom: 5px; font-family: var(--p-font); }
-.footer-links a, .footer-gallery a { text-decoration: none; color: #cccccc; font-size: 0.9rem; }
-.footer-links a:hover, .footer-gallery a:hover { color: #ffffff; }
-.footer-contact button {
-  display: block; width: 100%; margin-bottom: 10px; padding: 10px 15px;
-  background-color: #d319ba; color: #ffffff; border: none; border-radius: 5px;
-  cursor: pointer; font-size: 0.9rem; font-family: var(--titulos);
-}
-.footer-contact button:hover { background-color: #a0128d; }
-.footer-bottom { background-color: #151820; text-align: center; padding: 1px; color: #ffffff; font-family: var(--p-font); }
-
-@media (max-width: 768px) {
-  .footer-content { flex-direction: column; align-items: center; padding: 15px; }
-  .footer-logo { margin-left: 0; margin-right: 0; margin-bottom: 15px; }
-  .footer-links, .footer-contact, .footer-gallery { text-align: center; margin-bottom: 15px; }
-}
-
-/* ==========================================================================
-   12. SEÇÃO NOSSO PROJETO (Adicionado de projeto.css)
-   ========================================================================== */
-.nosso-projeto {
-  display: flex; flex-direction: row; align-items: flex-start;
-  color: #fff; padding: 40px 80px;
-}
-
-.nosso-projeto-imagem { flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
-.carrinho-img { max-width: 100%; width: 450px; height: auto; margin-top: 20px; }
-
-.nosso-projeto-texto {
-  flex: 1; display: flex; flex-direction: column; align-items: flex-start;
-  padding: 100px 40px; text-align: justify;
-}
-
-.descricao-projeto { font-size: 1em; line-height: 1.6; max-width: 600px; margin-bottom: 20px; color: #ccc; font-family: var(--p-font); }
-.botoes-projeto { display: flex; gap: 25px; margin-top: 20px; }
-
-@media (max-width: 600px) {
-  .nosso-projeto { flex-direction: column; text-align: center; padding: 0px 40px; }
-  .nosso-projeto-imagem, .nosso-projeto-texto { padding: 0; align-items: center; }
-  .titulo-projeto { font-size: 2em; }
-  .descricao-projeto { font-size: 0.9em; }
-  .carrinho-img { width: 80%; }
-  .botoes-projeto { flex-direction: column; width: 100%; }
-  .small-gap { padding-top: 35%; }
+  /* Rodapé */
+  .footer-content { flex-direction: column; text-align: center; gap: 40px; }
+  .footer-logo { align-items: center; margin: 0 auto; }
 }
